@@ -14,7 +14,7 @@ def generate_launch_description():
                 ('filtered_cloud', 'dsor_cloud')
             ],
             parameters=[{
-                // Adjust the DSOR parameter values as needed. 
+                # Adjust the DSOR parameter values as needed. 
                 'k': 5,
                 'std': 0.01,
                 'range_mul': 0.05

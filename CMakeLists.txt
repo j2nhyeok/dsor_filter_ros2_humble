@@ -45,6 +45,11 @@ ament_target_dependencies(test_pcd rclcpp sensor_msgs pcl_conversions pcl_ros)
 target_link_libraries(test_pcd ${PCL_LIBRARIES})
 install(TARGETS test_pcd DESTINATION lib/${PROJECT_NAME})
 
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
 # ------------------------------------------------------
 
 if(BUILD_TESTING)
