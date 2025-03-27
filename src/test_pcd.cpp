@@ -6,7 +6,7 @@ using PointT = pcl::PointXYZ;
 
 int main(int argc, char** argv) {
   if (argc < 3) {
-    std::cout << "Usage: ./pcd_dsor_filter input.pcd output.pcd" << std::endl;
+    std::cout << "Usage: ./pcd_dsor_filter input.pcd output.pcd [mean_k] [std_mul] [range_mul]" << std::endl;
     return -1;
   }
 
@@ -20,11 +20,21 @@ int main(int argc, char** argv) {
 
   std::cout << "Loaded " << cloud->size() << " points from " << argv[1] << std::endl;
 
-  // "Adjust the DSOR parameter values as needed."
+  // 기본값 설정
   int mean_k = 3;
-  float std_mul = 0.08;
-  float range_mul = 0.08;
+  float std_mul = 0.05;
+  float range_mul = 0.05;
 
+  // 추가 인자가 주어지면 파라미터로 사용
+  if (argc >= 6) {
+    mean_k = std::stoi(argv[3]);
+    std_mul = std::stof(argv[4]);
+    range_mul = std::stof(argv[5]);
+  } else {
+    std::cout << "Using default parameters: mean_k=" << mean_k 
+              << ", std_mul=" << std_mul 
+              << ", range_mul=" << range_mul << std::endl;
+  }
 
   filtered_cloud = dsor(cloud, mean_k, std_mul, range_mul, false);
 
